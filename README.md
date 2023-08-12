@@ -19,7 +19,9 @@ python generate_dataset.py -data cifar10 -nc 10 -if 0.01 -noniid 0.5 --seed 1
 
 The output as follows:
 
+
 <details>
+    <summary>Show more</summary>
 Original number of samples of each label:
 [5000, 2997, 1796, 1077, 645, 387, 232, 139, 83, 50]
 All num_data_train
@@ -36,7 +38,8 @@ client:8:  1240 [(0, 25), (1, 0), (2, 329), (3, 633), (4, 81), (5, 172), (6, 0),
 client:9:  1240 [(0, 30), (1, 752), (2, 134), (3, 136), (4, 186), (5, 1), (6, 0), (7, 0), (8, 1), (9, 0)]
 Saving to disk.
 Finish generating dataset.
-
+</details>
+<br/>
 #### 2. Federated Learning:
 
 Noted that CRFDC is applied after federated learning and can also be seamlessly integrated with most existing federated learning algorithms to further improve performance.
