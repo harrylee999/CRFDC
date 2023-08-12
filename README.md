@@ -40,6 +40,7 @@ Saving to disk.
 Finish generating dataset.
 </details>
 <br/>
+
 #### 2. Federated Learning:
 
 Noted that CRFDC is applied after federated learning and can also be seamlessly integrated with most existing federated learning algorithms to further improve performance.
