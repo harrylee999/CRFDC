@@ -8,8 +8,6 @@ Please install the required packages. The code is compiled with Python 3.7 depen
 
 Example codes to run CRFDC with FedAvg on CIFAR10 is given here.
 
-More completed codebase will be released upon acceptance. 
-
 #### 1. Generate Non-IID and Long-Tailed Data:
 CIFAR-10 , 10 clients, imbalance_factor = 0.01, non-IID-alpha = 0.5.
 ```bash
