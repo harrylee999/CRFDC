@@ -1,3 +1,5 @@
+## [Improving Generalization and Personalization in Long-Tailed Federated Learning via Classifier Retraining, Euro-Par 2024](https://link.springer.com/chapter/10.1007/978-3-031-69766-1_28)
+
 ### Requirements
 
 Please install the required packages. The code is compiled with Python 3.7 dependencies in a virtual environment via
@@ -65,6 +67,19 @@ python main.py -algo CRFDC -data cifar10 -dev cuda --seed 1 --model_path ../resu
 ```bash
 cd ./system
 python get_mi.py -data cifar10 -dev cuda --seed 1 --model_path ../results/cifar10/model/FedAvgbest.pt
+```
+
+## Citation
+If this codebase can help you, please cite our papers:
+```bash
+@inproceedings{li2024improving,
+title={Improving Generalization and Personalization in Long-Tailed Federated Learning via Classifier Retraining},
+author={Li, Yuhang and Liu, Tong and Shen, Wenfeng and Cui, Yangguang and Lu, Weijia},
+booktitle={Euro-Par 2024: Parallel Processing},
+year={2024},
+publisher={Springer Nature Switzerland},
+pages={408--423},
+}
 ```
 
 
