@@ -8,6 +8,7 @@ import logging
 import random
 from flcore.servers.serveravg import FedAvg
 from flcore.servers.servercrfdc import FedCRFDC
+from flcore.servers.serverccvr import FedCCVR
 from flcore.servers.serverlocal import Local
 from flcore.trainmodel.resnet import resnet18,resnet8,BaseHeadSplit
 from utils.mem_utils import MemReporter
@@ -56,6 +57,14 @@ def run(args):
             args.model.load_state_dict(global_params)
       
         server = FedCRFDC(args)
+
+    elif args.algorithm == "CCVR":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+        global_params = torch.load(args.model_path)
+        args.model.load_state_dict(global_params)
+        server = FedCCVR(args)
 
     elif args.algorithm == "Local":
         args.head = copy.deepcopy(args.model.classifier)
