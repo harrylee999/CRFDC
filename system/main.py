@@ -7,6 +7,13 @@ import logging
 
 import random
 from flcore.servers.serveravg import FedAvg
+from flcore.servers.serverprox import FedProx
+from flcore.servers.serverdyn import FedDyn
+from flcore.servers.serverbabu import FedBABU
+from flcore.servers.serverrod import FedROD
+from flcore.servers.servercreff import FedCreff
+from flcore.servers.serverala import FedALA
+from flcore.servers.serverrep import FedRep
 from flcore.servers.servercrfdc import FedCRFDC
 from flcore.servers.serverccvr import FedCCVR
 from flcore.servers.serverlocal import Local
@@ -38,6 +45,48 @@ def run(args):
         args.model.classifier = torch.nn.Identity()
         args.model = BaseHeadSplit(args.model, args.head)
         server = FedAvg(args)
+
+    elif args.algorithm == "FedProx":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+        server = FedProx(args)
+
+    elif args.algorithm == "FedDyn":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+        server = FedDyn(args)   
+
+    elif args.algorithm == "Creff":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+        server = FedCreff(args)
+
+    elif args.algorithm == "FedROD":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+      
+        server = FedROD(args)
+
+    elif args.algorithm == "FedRep":
+        args.head = copy.deepcopy(args.model.classifier)
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+      
+        server = FedRep(args)
+
+    elif args.algorithm == "FedBABU":
+        args.head = copy.deepcopy(args.model.classifier)
+
+        args.model.classifier = torch.nn.Identity()
+        args.model = BaseHeadSplit(args.model, args.head)
+        server = FedBABU(args)
+
+    elif args.algorithm == "FedALA":
+            server = FedALA(args)
   
     elif args.algorithm == "CRFDC":
         args.head = copy.deepcopy(args.model.classifier)
@@ -107,6 +156,25 @@ if __name__ == "__main__":
     parser.add_argument("--fea_lr", type=float, default=0.01)
     parser.add_argument("--crt_epoch", type=int, default=30,help = "retrain head ")
     parser.add_argument("--m", type=int, default=2,help = 'the number of selected head class statistics m.')
+
+    #FedProx 
+    parser.add_argument("--mu", type=float, default=0.01)
+    #FedDyn
+    parser.add_argument('-al', "--alpha", type=float, default=0.01)
+
+
+    #Creff
+    parser.add_argument("--lr_feature", type=float, default=0.1)
+    parser.add_argument('--match_epoch', type=int, default=100)
+
+    #babu
+    parser.add_argument('--fine_tuning_steps', type=int, default=5)
+
+    # FedALA
+    parser.add_argument('-et', "--eta", type=float, default=1.0)
+    parser.add_argument('-s', "--rand_percent", type=int, default=80)
+    parser.add_argument('-p', "--layer_idx", type=int, default=1,
+                        help="More fine-graind than its original paper.")
 
     args = parser.parse_args()
     torch.manual_seed(args.seed)  # cpu
